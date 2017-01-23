@@ -1,0 +1,60 @@
+$padding: 20px;
+body {
+  padding: $padding;
+}
+
+.magic-tip {
+    z-index: 2147483648;
+    position: absolute;
+    background-color: #333;
+    border: 7px solid #333;
+    border-radius: 7px
+}
+
+.magic-tip-left {
+    position: absolute;
+    top: 50%;
+    left: -17px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #333
+}
+
+.magic-tip-top {
+    position: absolute;
+    top: -17px;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px;
+    border-color: #333 transparent
+}
+
+.magic-tip-right {
+    position: absolute;
+    top: 50%;
+    right: -17px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent #333
+}
+
+.magic-tip-bottom {
+    position: absolute;
+    bottom: -17px;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0;
+    border-color: #333 transparent
+}
