@@ -31,7 +31,7 @@ var Previewer = function(Profile, config, Tipped) {
       console.log('mouseenter');
       var { target } = evt;
 
-      if('img' == target.localName && 24 < target.width) {
+      if('img' == target.localName && 50 < target.width) {
         evt.preventDefault();
         var videoId = Profile.getVideoId(target);
         target.addEventListener('mouseleave', _thumbLinkEventHandler.mouseleave, !1);
