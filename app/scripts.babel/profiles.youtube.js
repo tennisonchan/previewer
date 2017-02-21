@@ -54,7 +54,8 @@ Profiles.youtube = function() {
       return $(videoThumbEl).closest('[data-context-item-id]').attr('data-context-item-id');
     },
     getVideoId: function(videoThumbEl) {
-      return $(videoThumbEl).closest('[data-video-id]').attr('data-video-id') ||
+      return $(videoThumbEl).closest('[data-video-id]').attr('data-video-id') || // playlist
+        $(videoThumbEl).closest('[data-context-item-id]').attr('data-context-item-id') || // home page
         $(videoThumbEl).closest('[itemprop=videoId]').attr('content') ||
         $(videoThumbEl).closest('[data-vid]').attr('data-vid');
     },

@@ -158,6 +158,7 @@ var Tipped = (function($, window, document) {
 
   _this.hidePanel = function() {
     removeMouseoutEvent();
+    _this.iframeEl.src = '';
     postMessage({ message: 'stopVideo' });
   }
 
