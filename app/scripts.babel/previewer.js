@@ -30,11 +30,12 @@ var Previewer = function(Profile, config, Tipped) {
     mouseenter: debounce(function(evt) {
       console.log('mouseenter');
       var { target } = evt;
+      var videoId = Profile.getVideoId(target);
 
-      if('img' == target.localName && target.width > 50) {
+      if('img' == target.localName && target.width > 50 && videoId) {
         evt.preventDefault();
-        var videoId = Profile.getVideoId(target);
         target.addEventListener('mouseout', _thumbLinkEventHandler.mouseout, !1);
+        target.addEventListener('click', _thumbLinkEventHandler.mouseout, !1);
         Tipped.showPanel(evt, videoId);
       }
     }, config.delayPreview),
