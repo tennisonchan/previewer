@@ -19,10 +19,7 @@
     "tabs",
     "background"
   ],
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
-  },
+  "options_page": "options.html",
   "content_security_policy": "script-src 'self' https://www.youtube.com https://s.ytimg.com; object-src 'self'",
   "content_scripts": [{
     "css": [
