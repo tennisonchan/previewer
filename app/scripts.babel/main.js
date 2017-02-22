@@ -1,7 +1,7 @@
 /*jshint newcap: false*/
-/*global Preview, Profiles */
+/*global Previewer, Profiles, Tipped */
 
-(function(window, Preview, Profiles, Tipped) {
+(function(window, Previewer, Profiles, Tipped) {
   'use strict';
 
   var App,

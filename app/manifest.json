@@ -33,7 +33,6 @@
     ],
     "js": [
       "bower_components/jquery/dist/jquery.min.js",
-      "scripts/env.js",
       "scripts/profiles.youtube.js",
       "scripts/tip.js",
       "scripts/previewer.js",

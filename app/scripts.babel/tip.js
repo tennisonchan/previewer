@@ -1,4 +1,4 @@
-var Tipped = (function($, window, document) {
+var Tipped = (function(window, document) {
 
   var _this = {
     iframeEl: null,
@@ -166,4 +166,4 @@ var Tipped = (function($, window, document) {
 
   return _this;
 
-})(jQuery, window, window.document);
+})(window, window.document);
