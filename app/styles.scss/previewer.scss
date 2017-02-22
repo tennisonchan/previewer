@@ -1,13 +1,7 @@
-$padding: 20px;
-
-body {
-  padding: $padding;
-}
-
 .previewer-tip {
-    z-index: 2147483648;
-    position: absolute;
-    background-color: #333;
-    border: 7px solid #333;
-    border-radius: 7px
+  background-color: #333;
+  border-radius: 5px;
+  border: 5px solid #333;
+  position: absolute;
+  z-index: 2147483648;
 }
