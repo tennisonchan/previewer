@@ -17,8 +17,7 @@
   "permissions": [
     "storage",
     "tabs",
-    "background",
-    "<all_urls>"
+    "background"
   ],
   "options_ui": {
     "page": "options.html",
@@ -35,10 +34,8 @@
     "js": [
       "bower_components/jquery/dist/jquery.min.js",
       "scripts/env.js",
-      "scripts/iframe_api.js",
       "scripts/profiles.youtube.js",
       "scripts/tip.js",
-      "scripts/videoboard.js",
       "scripts/previewer.js",
       "scripts/main.js"
     ],
@@ -46,7 +43,6 @@
     "all_frames": false
   }],
   "web_accessible_resources": [
-    "videoboard.html",
     "videoTip.html"
   ]
 }
