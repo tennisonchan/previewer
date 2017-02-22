@@ -5,6 +5,13 @@ function onYouTubeIframeAPIReady() {
 var PreviewPlayer = (function(window) {
   var _this = {};
   var player;
+  var _config = {
+    height: 270,
+    width: 480,
+    videoId: '',
+    playbackRate: 1,
+    playbackQuality: 'small'
+  };
   var _messageHandler = {
     stopVideo: function() {
       player.stopVideo();
@@ -20,7 +27,19 @@ var PreviewPlayer = (function(window) {
     }
   };
 
+  function getParams(searcParams) {
+    var params = {};
+    searcParams.replace(/([^=&]+)=([^&]*)/g, function(m, key, value) {
+      if (value) params[decodeURIComponent(key)] = decodeURIComponent(value);
+    });
+
+    Object.assign(_config, params);
+  }
+
   function initialize () {
+    var params = getParams(window.location.search);
+    Object.assign(_config, params);
+
     window.addEventListener('message', function receiveMessage(evt) {
       var { message, data = null } = evt.data;
 
@@ -32,12 +51,12 @@ var PreviewPlayer = (function(window) {
 
   _this.onYouTubeIframeAPIReady = function() {
     console.log('youtubeIframeAPIReady', performance.now());
-    var params = new URLSearchParams(window.location.search);
+    var { width, height, videoId } = _config;
 
     player = new YT.Player('player', {
-      height: params.get('height'),
-      width: params.get('width'),
-      videoId: params.get('videoId'),
+      height: height,
+      width: width,
+      videoId: videoId,
       playerVars: {
         autoplay: 0,
         controls: 0,
@@ -61,12 +80,13 @@ var PreviewPlayer = (function(window) {
   function onPlayerReady(event) {
     console.log('onPlayerReady', performance.now());
 
-    player.seekTo(15, true);
+    var { playbackRate, playbackQuality } = _config;
     // setInterval(function() {
     //   console.log('hello', player.getCurrentTime());
     // }, 1000);
-    player.setPlaybackQuality('small');
-    player.setPlaybackRate(2);
+    player.seekTo(15, true);
+    player.setPlaybackQuality(playbackQuality);
+    player.setPlaybackRate(playbackRate);
   }
 
   function onPlayerStateChange(event) {
