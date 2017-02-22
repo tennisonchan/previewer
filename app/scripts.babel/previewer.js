@@ -31,15 +31,15 @@ var Previewer = function(Profile, config, Tipped) {
       console.log('mouseenter');
       var { target } = evt;
 
-      if('img' == target.localName && 50 < target.width) {
+      if('img' == target.localName && target.width > 50) {
         evt.preventDefault();
         var videoId = Profile.getVideoId(target);
-        target.addEventListener('mouseleave', _thumbLinkEventHandler.mouseleave, !1);
+        target.addEventListener('mouseout', _thumbLinkEventHandler.mouseout, !1);
         Tipped.showPanel(evt, videoId);
       }
     }, config.delayPreview),
-    mouseleave: function(evt) {
-      console.log('mouseleave');
+    mouseout: function(evt) {
+      console.log('mouseout');
       clearTimeout(timeout);
       Tipped.hidePanel(evt);
     }
