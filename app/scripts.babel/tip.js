@@ -6,6 +6,7 @@ var Tipped = (function(window, document) {
     iframeWidth: 480,
     tip: null,
   };
+  var config = {};
 
   function initialize() {
     var { tip, iframeEl } = createTip();
@@ -27,7 +28,14 @@ var Tipped = (function(window, document) {
     if (videoId) {
       var height = _this.iframeHeight;
       var width = _this.iframeWidth;
-      _this.iframeEl.src = chrome.extension.getURL(`videoTip.html?width=${width}&height=${height}&videoId=${videoId}`);
+      var url = `videoTip.html?width=${width}&height=${height}&videoId=${videoId}`
+      _this.iframeEl.src = chrome.extension.getURL(url);
+      _this.iframeEl.onload = function() {
+        postMessage({
+          message: 'updateConfigs',
+          data: config
+        });
+      }
     } else {
       _this.iframeEl.style.setProperty('display', 'none', 'important');
     }
@@ -133,6 +141,15 @@ var Tipped = (function(window, document) {
     }
   }
 
+  _this.updateConfigs = function(_config) {
+    Object.assign(config, _config);
+
+    postMessage({
+      message: 'updateConfigs',
+      data: config
+    });
+  }
+
   _this.showPanel = function(evt, videoId) {
     var { align, src } = getBackgroundStyle(evt);
     var { tipTop, tipLeft } = getTipDimension(evt.target);
@@ -165,5 +182,4 @@ var Tipped = (function(window, document) {
   initialize();
 
   return _this;
-
 })(window, window.document);

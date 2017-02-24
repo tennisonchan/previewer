@@ -1,27 +1,118 @@
 <!doctype html>
 <html>
-  <head>
-    <!-- build:css styles/options-vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css styles/main.css -->
-    <link href="styles/main.css" rel="stylesheet">
-    <!-- endbuild -->
-  </head>
-  <body>
-    <h1>'Allo, 'Allo!</h1>
 
-    <!-- build:js scripts/options-vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/material-design-lite/material.min.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+<head>
+  <title>YouTube Extension Options</title>
+</head>
+<link rel="stylesheet" href="styles/options.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <!-- build:js scripts/options.js -->
-    <script src="scripts/options.js"></script>
-    <!-- endbuild -->
-  </body>
+<body class="option-page">
+  <div class="preview-options mdl-layout mdl-js-layout has-drawer is-upgraded">
+    <main class="mdl-layout__content">
+      <div class="preview-options__posts mdl-grid">
+
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col playback-rate">
+          <div class="mdl-card__title mdl-card--expand">
+            <div class="animated-background"></div>
+          </div>
+          <div class="mdl-card__supporting-text">
+            <h2 class="mdl-card__title-text">PlayBack Rate</h2>
+            Adjust the slider below to change the playback rate. The default playback rate is 1, which indicates that the video is playing at normal speed.
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <p style="width: 100%; margin-bottom: 0;">
+              <input id="playback-rate-slide" class="mdl-slider mdl-js-slider" type="range" min="0.5" max="2" value="1" step="0.5" />
+            </p>
+          </div>
+        </div>
+
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mute-switch-card">
+          <div class="mdl-card__title mdl-card--expand">
+            <div class="background">
+              <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%" style="fill: white;">
+                <use class="ytp-svg-shadow" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#ytp-svg-65"></use>
+                <path class="ytp-svg-fill" d="m 21.48,17.98 c 0,-1.77 -1.02,-3.29 -2.5,-4.03 v 2.21 l 2.45,2.45 c .03,-0.2 .05,-0.41 .05,-0.63 z m 2.5,0 c 0,.94 -0.2,1.82 -0.54,2.64 l 1.51,1.51 c .66,-1.24 1.03,-2.65 1.03,-4.15 0,-4.28 -2.99,-7.86 -7,-8.76 v 2.05 c 2.89,.86 5,3.54 5,6.71 z M 9.25,8.98 l -1.27,1.26 4.72,4.73 H 7.98 v 6 H 11.98 l 5,5 v -6.73 l 4.25,4.25 c -0.67,.52 -1.42,.93 -2.25,1.18 v 2.06 c 1.38,-0.31 2.63,-0.95 3.69,-1.81 l 2.04,2.05 1.27,-1.27 -9,-9 -7.72,-7.72 z m 7.72,.99 -2.09,2.08 2.09,2.09 V 9.98 z" id="ytp-svg-65"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="mdl-card__supporting-text">
+            <h2 class="mdl-card__title-text">Mute Preview Video</h2>
+            To mute the video panel when it's playing
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <p style="width: 100%; margin-bottom: 0;">
+              <label for="mute-switch" class="mute-switch mdl-switch mdl-js-switch mdl-js-ripple-effect">
+                <input type="checkbox" id="mute-switch" class="mdl-switch__input">
+                <span class="mdl-switch__label"></span>
+              </label>
+            </p>
+          </div>
+        </div>
+
+        <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col caption-switch-card">
+          <div class="mdl-card__title mdl-card--expand">
+            <div class="background"></div>
+          </div>
+          <div class="mdl-card__supporting-text">
+            <h2 class="mdl-card__title-text">Show Caption on Preview</h2>
+            Toggle to show or hide the caption.
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <p style="width: 100%; margin-bottom: 0;">
+              <label for="caption-switch" class="caption-switch mdl-switch mdl-js-switch mdl-js-ripple-effect">
+                <input type="checkbox" id="caption-switch" class="mdl-switch__input">
+                <span class="mdl-switch__label"></span>
+              </label>
+            </p>
+          </div>
+        </div>
+
+        <!-- <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--8-col">
+          <div class="mdl-card__title mdl-card--expand">
+            <div class="mdl-grid">
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+              <div class="mdl-cell">Color</div>
+            </div>
+          </div>
+          <div class="mdl-card__supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Aenan convallis.
+          </div>
+        </div> -->
+
+      </div>
+    </main>
+    <div class="mdl-layout__obfuscator"></div>
+  </div>
+
+  <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <div class="mdl-snackbar__action" type="button"></div>
+  </div>
+</body>
+<script src="bower_components/material-design-lite/material.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="scripts/options.js"></script>
+
 </html>

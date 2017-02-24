@@ -1,9 +1,5 @@
 @import '../bower_components/material-design-lite/material.min';
 
-$preview-sparkbars-height: 6px;
-$preview-sparkbars-likes-background-color: #167ac6;
-$preview-sparkbars-dislikes-background-color: #ccc;
-
 body.option-page::before {
   background-attachment: fixed;
   background-size: cover;
@@ -50,7 +46,7 @@ body.option-page .preview-options {
   padding: 0;
   height: 250px;
 }
-.preview-intervals .animated-background {
+.playback-rate .animated-background {
   background-color: #ffffff;
   background-repeat: no-repeat;
   background-size: 1288px 946px;
@@ -60,35 +56,7 @@ body.option-page .preview-options {
   margin-right: auto;
   width: 322px;
 }
-.preview-sparkbars {
-  clear: both;
-  height: 0;
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  top: 250px;
-  transition: height 0.5s;
-  width: 100%;
-  > .preview-sparkbar-likes {
-    background: $preview-sparkbars-likes-background-color;
-  }
-  > .preview-sparkbar-dislikes {
-    background: $preview-sparkbars-dislikes-background-color;
-  }
-   > .preview-sparkbar-dislikes,
-  > .preview-sparkbar-likes {
-    float: left;
-    height: $preview-sparkbars-height;
-    transition: width 0.5s;
-  }
-}
-.rating-bar {
-  &.on {
-    .preview-sparkbars {
-      height: $preview-sparkbars-height;
-    }
-  }
-
+.caption-switch-card {
   .background {
     background-color: #ffffff;
     background-repeat: no-repeat;
@@ -401,7 +369,7 @@ body.option-page .preview-options {
   padding: 40px;
 }
 
-.rewind-button {
+.mute-switch-card {
   .background {
     background-color: #d21216;
     background-repeat: no-repeat;

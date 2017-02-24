@@ -5,14 +5,21 @@ function onYouTubeIframeAPIReady() {
 var PreviewPlayer = (function(window) {
   var _this = {};
   var player;
-  var _config = {
+  var params = {
     height: 270,
     width: 480,
     videoId: '',
+  };
+  var config = {
     playbackRate: 1,
+    showCaption: false,
+    mute: false,
     playbackQuality: 'small'
   };
   var _messageHandler = {
+    updateConfigs: function(config) {
+      setConfig(config);
+    },
     stopVideo: function() {
       player.stopVideo();
     },
@@ -33,12 +40,12 @@ var PreviewPlayer = (function(window) {
       if (value) params[decodeURIComponent(key)] = decodeURIComponent(value);
     });
 
-    Object.assign(_config, params);
+    return params;
   }
 
   function initialize () {
-    var params = getParams(window.location.search);
-    Object.assign(_config, params);
+    var _params = getParams(window.location.search);
+    Object.assign(params, _params);
 
     window.addEventListener('message', function receiveMessage(evt) {
       var { message, data = null } = evt.data;
@@ -51,7 +58,8 @@ var PreviewPlayer = (function(window) {
 
   _this.onYouTubeIframeAPIReady = function() {
     console.log('youtubeIframeAPIReady', performance.now());
-    var { width, height, videoId } = _config;
+    var { width, height, videoId } = params;
+    var { showCaption } = config;
 
     player = new YT.Player('player', {
       height: height,
@@ -62,7 +70,8 @@ var PreviewPlayer = (function(window) {
         controls: 0,
         showinfo: 0,
         rel: 0,
-        modestbranding: 1
+        modestbranding: 1,
+        cc_load_policy: showCaption ? 1 : 0
       },
       events: {
         onReady: onPlayerReady,
@@ -80,13 +89,21 @@ var PreviewPlayer = (function(window) {
   function onPlayerReady(event) {
     console.log('onPlayerReady', performance.now());
 
-    var { playbackRate, playbackQuality } = _config;
     // setInterval(function() {
     //   console.log('hello', player.getCurrentTime());
     // }, 1000);
     player.seekTo(15, true);
+  }
+
+  function setConfig({ playbackRate, playbackQuality, mute, showCaption }) {
     player.setPlaybackQuality(playbackQuality);
     player.setPlaybackRate(playbackRate);
+    player.setOption('cc', 'reload', showCaption ? true : null);
+    if (mute) {
+      player.mute();
+    } else {
+      player.unMute();
+    }
   }
 
   function onPlayerStateChange(event) {

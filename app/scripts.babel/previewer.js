@@ -6,6 +6,7 @@ var Previewer = function(Profile, config, Tipped) {
   var _thumbLinkEventHandler = {};
 
   function initialize() {
+    Tipped.updateConfigs(config);
     document.body.addEventListener('mouseover', _thumbLinkEventHandler.mouseenter, !1);
   }
 
@@ -25,6 +26,8 @@ var Previewer = function(Profile, config, Tipped) {
     for (var key in changes) {
       config[key] = changes[key].newValue;
     }
+
+    Tipped.updateConfigs(config);
   }
 
   _thumbLinkEventHandler.mouseenter = debounce(function(evt) {
