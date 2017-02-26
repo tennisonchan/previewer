@@ -17,8 +17,8 @@ var PreviewPlayer = (function(window) {
     playbackQuality: 'small'
   };
   var _messageHandler = {
-    updateConfigs: function(config) {
-      setConfig(config);
+    updateConfigs: function(_config) {
+      config = Object.assign(config, _config)
     },
     stopVideo: function() {
       player.stopVideo();
@@ -43,17 +43,23 @@ var PreviewPlayer = (function(window) {
     return params;
   }
 
-  function initialize () {
+  function initialize() {
     var _params = getParams(window.location.search);
     Object.assign(params, _params);
 
-    window.addEventListener('message', function receiveMessage(evt) {
+    window.addEventListener('message', function(evt) {
       var { message, data = null } = evt.data;
 
       if (message && typeof _messageHandler[message] === 'function') {
         _messageHandler[message](data);
       }
     }, false);
+
+    postMessage({ message: 'iframeOnLoad' });
+  }
+
+  function postMessage(data) {
+    window.parent.postMessage(data, '*');
   }
 
   _this.onYouTubeIframeAPIReady = function() {
@@ -93,6 +99,7 @@ var PreviewPlayer = (function(window) {
     //   console.log('hello', player.getCurrentTime());
     // }, 1000);
     player.seekTo(15, true);
+    setConfig(config);
   }
 
   function setConfig({ playbackRate, playbackQuality, mute, showCaption }) {
