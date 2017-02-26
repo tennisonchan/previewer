@@ -77,6 +77,7 @@ var PreviewPlayer = (function(window) {
         showinfo: 0,
         rel: 0,
         modestbranding: 1,
+        cc_lang_pref: 'en',
         cc_load_policy: showCaption ? 1 : 0
       },
       events: {
