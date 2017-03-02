@@ -12,7 +12,6 @@
       delayPreview: 500,
       mute: false,
       playbackRate: 1,
-      showCaption: false,
       startAt: 0,
     };
 
@@ -20,7 +19,6 @@
     config.delayPreview = Number(config.delayPreview);
     config.mute = Boolean(config.mute);
     config.playbackRate = Number(config.playbackRate);
-    config.showCaption = Boolean(config.showCaption);
     config.startAt = Number(config.startAt);
 
     var profile = Profiles[list[window.location.host] || 'youtube']();

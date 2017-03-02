@@ -14,7 +14,6 @@ var PreviewPlayer = (function(window) {
     mute: false,
     playbackQuality: 'small',
     playbackRate: 1,
-    showCaption: false,
     startAt: 0,
   };
   var _messageHandler = {
@@ -66,7 +65,7 @@ var PreviewPlayer = (function(window) {
   _this.onYouTubeIframeAPIReady = function() {
     console.log('youtubeIframeAPIReady', performance.now());
     var { width, height, videoId } = params;
-    var { showCaption, startAt } = config;
+    var { startAt } = config;
 
     player = new YT.Player('player', {
       height: height,
@@ -78,9 +77,7 @@ var PreviewPlayer = (function(window) {
         controls: 0,
         showinfo: 0,
         rel: 0,
-        modestbranding: 1,
-        cc_lang_pref: 'en',
-        cc_load_policy: showCaption ? 1 : 0
+        modestbranding: 1
       },
       events: {
         onReady: onPlayerReady,
@@ -105,10 +102,9 @@ var PreviewPlayer = (function(window) {
     setConfig(config);
   }
 
-  function setConfig({ playbackRate, playbackQuality, mute, showCaption }) {
+  function setConfig({ playbackRate, playbackQuality, mute }) {
     player.setPlaybackQuality(playbackQuality);
     player.setPlaybackRate(playbackRate);
-    player.setOption('cc', 'reload', showCaption ? true : null);
     if (mute) {
       player.mute();
     } else {
