@@ -1,6 +1,7 @@
 (function($) {
 
-  var timeInterval;
+  var animationTimeInterval = 0;
+  var timeout = 0
   var frame = 0;
 
   $(function() {
@@ -9,24 +10,28 @@
 
   function restore_options() {
     chrome.storage.sync.get({
-      playbackRate: 1,
       mute: false,
+      playbackRate: 1,
       showCaption: false,
+      startAt: 0,
     }, function(data) {
-      var playbackRate = Number(data.playbackRate);
       var mute = Boolean(data.mute);
+      var playbackRate = Number(data.playbackRate);
       var showCaption = Boolean(data.showCaption);
-      console.log('hello', playbackRate, mute, showCaption);
+      var startAt = Number(data.startAt);
+      console.log('hello', playbackRate, mute, showCaption, startAt);
 
-      clearInterval(timeInterval);
-      timeInterval = setInterval(animate, 50 / playbackRate);
-      var muteSwitchElement = document.querySelector('.mute-switch');
+      clearInterval(animationTimeInterval);
+      animationTimeInterval = setInterval(animate, 50 / playbackRate);
       var captionSwitchElement = document.querySelector('.caption-switch');
+      var muteSwitchElement = document.querySelector('.mute-switch');
       var playbackRateSlideElement = document.querySelector('#playback-rate-slide');
+      var startAtSlideElement = document.querySelector('#start-at-slide');
 
-      playbackRateSlideElement.MaterialSlider.change(playbackRate);
-      muteSwitchElement.MaterialSwitch[mute ? 'on': 'off']();
       captionSwitchElement.MaterialSwitch[showCaption ? 'on' : 'off']();
+      muteSwitchElement.MaterialSwitch[mute ? 'on': 'off']();
+      playbackRateSlideElement.MaterialSlider.change(playbackRate);
+      startAtSlideElement.MaterialSlider.change(startAt);
     });
   }
 
@@ -56,10 +61,20 @@
     frame++;
   }
 
+  $('#start-at-slide')
+    .on('input', function(e) {
+      clearInterval(timeout);
+      var value = this.value;
+      timeout = setTimeout(function() {
+        saveOption('startAt', Number(value), 'Saved start time at ' + value + ' second(s)');
+      }, 500);
+    });
+
+
   $('#playback-rate-slide')
     .on('input', function(e) {
-      clearInterval(timeInterval);
-      timeInterval = setInterval(animate, 50 / this.value);
+      clearInterval(animationTimeInterval);
+      animationTimeInterval = setInterval(animate, 50 / this.value);
       saveOption('playbackRate', Number(this.value), 'Saved playback rate as ' + this.value);
     });
 

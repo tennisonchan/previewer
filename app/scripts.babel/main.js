@@ -10,16 +10,18 @@
     },
     config = {
       delayPreview: 500,
-      playbackRate: 1,
       mute: false,
-      showCaption: false
+      playbackRate: 1,
+      showCaption: false,
+      startAt: 0,
     };
 
   chrome.storage.sync.get(config, function(config) {
     config.delayPreview = Number(config.delayPreview);
-    config.playbackRate = Number(config.playbackRate);
     config.mute = Boolean(config.mute);
+    config.playbackRate = Number(config.playbackRate);
     config.showCaption = Boolean(config.showCaption);
+    config.startAt = Number(config.startAt);
 
     var profile = Profiles[list[window.location.host] || 'youtube']();
 

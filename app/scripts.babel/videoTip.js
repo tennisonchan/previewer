@@ -7,14 +7,15 @@ var PreviewPlayer = (function(window) {
   var player;
   var params = {
     height: 270,
-    width: 480,
     videoId: '',
+    width: 480,
   };
   var config = {
+    mute: false,
+    playbackQuality: 'small',
     playbackRate: 1,
     showCaption: false,
-    mute: false,
-    playbackQuality: 'small'
+    startAt: 0,
   };
   var _messageHandler = {
     updateConfigs: function(_config) {
@@ -65,13 +66,14 @@ var PreviewPlayer = (function(window) {
   _this.onYouTubeIframeAPIReady = function() {
     console.log('youtubeIframeAPIReady', performance.now());
     var { width, height, videoId } = params;
-    var { showCaption } = config;
+    var { showCaption, startAt } = config;
 
     player = new YT.Player('player', {
       height: height,
       width: width,
       videoId: videoId,
       playerVars: {
+        start: startAt,
         autoplay: 0,
         controls: 0,
         showinfo: 0,
