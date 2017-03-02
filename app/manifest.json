@@ -2,6 +2,12 @@
   "name": "__MSG_appName__",
   "version": "0.1.0",
   "manifest_version": 2,
+  "short_name": "YouTube Previewer",
+  "author": {
+    "name" : "Tennison Chan",
+    "email" : "tennison.chan+gh@gmail.com",
+    "url" : "http://.com/"
+  },
   "description": "__MSG_appDescription__",
   "icons": {
     "16": "images/icon.png",
