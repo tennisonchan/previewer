@@ -6,11 +6,23 @@ var Tipped = (function(window, document) {
     iframeWidth: 480,
     tip: null,
   };
+  var _messageHandler = {};
+  var config = {};
 
   function initialize() {
     var { tip, iframeEl } = createTip();
     _this.tip = tip;
     _this.iframeEl = iframeEl;
+
+    window.addEventListener('message', function(evt) {
+      var { message, origin, data = null } = evt.data;
+      if (`${evt.origin}/` !== chrome.extension.getURL('')){ return false; }
+
+      if (message && typeof _messageHandler[message] === 'function') {
+        _messageHandler[message](data);
+      }
+    }, false);
+
     console.log('initialize', performance.now());
   }
 
@@ -27,7 +39,8 @@ var Tipped = (function(window, document) {
     if (videoId) {
       var height = _this.iframeHeight;
       var width = _this.iframeWidth;
-      _this.iframeEl.src = chrome.extension.getURL(`videoTip.html?width=${width}&height=${height}&videoId=${videoId}`);
+      var url = `videoTip.html?width=${width}&height=${height}&videoId=${videoId}`
+      _this.iframeEl.src = chrome.extension.getURL(url);
     } else {
       _this.iframeEl.style.setProperty('display', 'none', 'important');
     }
@@ -133,6 +146,17 @@ var Tipped = (function(window, document) {
     }
   }
 
+  _messageHandler.iframeOnLoad = function() {
+    postMessage({
+      message: 'updateConfigs',
+      data: config
+    });
+  }
+
+  _this.updateConfigs = function(_config) {
+    Object.assign(config, _config);
+  }
+
   _this.showPanel = function(evt, videoId) {
     var { align, src } = getBackgroundStyle(evt);
     var { tipTop, tipLeft } = getTipDimension(evt.target);
@@ -165,5 +189,4 @@ var Tipped = (function(window, document) {
   initialize();
 
   return _this;
-
 })(window, window.document);

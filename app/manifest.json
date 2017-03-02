@@ -1,11 +1,11 @@
 {
   "name": "__MSG_appName__",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
+    "16": "images/icon.png",
+    "128": "images/icon.png"
   },
   "default_locale": "en",
   "background": {
@@ -19,10 +19,7 @@
     "tabs",
     "background"
   ],
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
-  },
+  "options_page": "options.html",
   "content_security_policy": "script-src 'self' https://www.youtube.com https://s.ytimg.com; object-src 'self'",
   "content_scripts": [{
     "css": [

@@ -5,25 +5,32 @@ function onYouTubeIframeAPIReady() {
 var PreviewPlayer = (function(window) {
   var _this = {};
   var player;
-  var _config = {
+  var params = {
     height: 270,
-    width: 480,
     videoId: '',
+    width: 480,
+  };
+  var config = {
+    mute: false,
+    playbackQuality: 'small',
     playbackRate: 1,
-    playbackQuality: 'small'
+    startAt: 0,
   };
   var _messageHandler = {
+    updateConfigs: function(_config) {
+      config = Object.assign(config, _config)
+    },
     stopVideo: function() {
-      player.stopVideo();
+      player && player.stopVideo();
     },
     pauseVideo: function() {
-      player.pauseVideo();
+      player && player.pauseVideo();
     },
     playVideo: function() {
-      player.playVideo();
+      player && player.playVideo();
     },
     seekTo: function({ seconds, allowSeekAhead }) {
-      player.seekTo(seconds, allowSeekAhead);
+      player && player.seekTo(seconds, allowSeekAhead);
     }
   };
 
@@ -33,31 +40,39 @@ var PreviewPlayer = (function(window) {
       if (value) params[decodeURIComponent(key)] = decodeURIComponent(value);
     });
 
-    Object.assign(_config, params);
+    return params;
   }
 
-  function initialize () {
-    var params = getParams(window.location.search);
-    Object.assign(_config, params);
+  function initialize() {
+    var _params = getParams(window.location.search);
+    Object.assign(params, _params);
 
-    window.addEventListener('message', function receiveMessage(evt) {
+    window.addEventListener('message', function(evt) {
       var { message, data = null } = evt.data;
 
       if (message && typeof _messageHandler[message] === 'function') {
         _messageHandler[message](data);
       }
     }, false);
+
+    postMessage({ message: 'iframeOnLoad' });
+  }
+
+  function postMessage(data) {
+    window.parent.postMessage(data, '*');
   }
 
   _this.onYouTubeIframeAPIReady = function() {
     console.log('youtubeIframeAPIReady', performance.now());
-    var { width, height, videoId } = _config;
+    var { width, height, videoId } = params;
+    var { startAt } = config;
 
     player = new YT.Player('player', {
       height: height,
       width: width,
       videoId: videoId,
       playerVars: {
+        start: startAt,
         autoplay: 0,
         controls: 0,
         showinfo: 0,
@@ -80,13 +95,21 @@ var PreviewPlayer = (function(window) {
   function onPlayerReady(event) {
     console.log('onPlayerReady', performance.now());
 
-    var { playbackRate, playbackQuality } = _config;
     // setInterval(function() {
     //   console.log('hello', player.getCurrentTime());
     // }, 1000);
     player.seekTo(15, true);
+    setConfig(config);
+  }
+
+  function setConfig({ playbackRate, playbackQuality, mute }) {
     player.setPlaybackQuality(playbackQuality);
     player.setPlaybackRate(playbackRate);
+    if (mute) {
+      player.mute();
+    } else {
+      player.unMute();
+    }
   }
 
   function onPlayerStateChange(event) {
