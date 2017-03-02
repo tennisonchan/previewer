@@ -60,7 +60,8 @@
   $('#start-at-slide')
     .on('input', function(e) {
       clearInterval(timeout);
-      var message = 'Saved start time at ' + this.value + ' second(s)';
+      var value = this.value;
+      var message = 'Saved start time at ' + value + ' second(s)';
       timeout = setTimeout(function() {
         saveOption('startAt', Number(value), message);
       }, 300);
