@@ -30,21 +30,24 @@ var Previewer = function(Profile, config, Tipped) {
     Tipped.updateConfigs(config);
   }
 
-  _thumbLinkEventHandler.mouseenter = debounce(function(evt) {
+  _thumbLinkEventHandler.mouseenter = function(evt) {
     console.log('mouseenter');
     var { target } = evt;
     var videoId = Profile.getVideoId(target);
 
     if ('img' == target.localName && target.width > 50 && videoId) {
+      clearTimeout(timeout);
       evt.preventDefault();
-      target.addEventListener('mouseout', _thumbLinkEventHandler.mouseout, !1);
       target.addEventListener('click', _thumbLinkEventHandler.mouseout, !1);
-      Tipped.showPanel(evt, videoId);
+      timeout = setTimeout(function() {
+        target.addEventListener('mouseout', _thumbLinkEventHandler.mouseout, !1);
+        Tipped.showPanel(evt, videoId);
+      }, config.delayPreview);
     }
-  }, config.delayPreview);
+  };
 
   _thumbLinkEventHandler.mouseout = function(evt) {
-    console.log('mouseout');
+    console.log('mouseout', evt.type);
     clearTimeout(timeout);
     Tipped.hidePanel(evt);
   };

@@ -9,7 +9,7 @@
       'www.youtube.com': 'youtube'
     },
     config = {
-      delayPreview: 500,
+      delayPreview: 300,
       mute: false,
       playbackRate: 1,
       startAt: 0,

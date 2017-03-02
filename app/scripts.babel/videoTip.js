@@ -21,16 +21,16 @@ var PreviewPlayer = (function(window) {
       config = Object.assign(config, _config)
     },
     stopVideo: function() {
-      player.stopVideo();
+      player && player.stopVideo();
     },
     pauseVideo: function() {
-      player.pauseVideo();
+      player && player.pauseVideo();
     },
     playVideo: function() {
-      player.playVideo();
+      player && player.playVideo();
     },
     seekTo: function({ seconds, allowSeekAhead }) {
-      player.seekTo(seconds, allowSeekAhead);
+      player && player.seekTo(seconds, allowSeekAhead);
     }
   };
 
