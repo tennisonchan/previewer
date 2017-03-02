@@ -35,11 +35,13 @@
       "*://www.youtube.com/*"
     ],
     "js": [
+      "bower_components/material-design-lite/material.min.js",
       "bower_components/jquery/dist/jquery.min.js",
       "scripts/profiles.youtube.js",
       "scripts/tip.js",
       "scripts/previewer.js",
-      "scripts/main.js"
+      "scripts/main.js",
+      "scripts/options.js"
     ],
     "run_at": "document_end",
     "all_frames": false
