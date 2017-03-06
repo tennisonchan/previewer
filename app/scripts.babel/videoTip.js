@@ -73,7 +73,7 @@ var PreviewPlayer = (function(window) {
       videoId: videoId,
       playerVars: {
         start: startAt,
-        autoplay: 0,
+        autoplay: 1,
         controls: 0,
         showinfo: 0,
         rel: 0,
