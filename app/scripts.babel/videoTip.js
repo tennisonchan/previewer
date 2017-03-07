@@ -98,7 +98,7 @@ var PreviewPlayer = (function(window) {
     // setInterval(function() {
     //   console.log('hello', player.getCurrentTime());
     // }, 1000);
-    player.seekTo(15, true);
+
     setConfig(config);
   }
 
