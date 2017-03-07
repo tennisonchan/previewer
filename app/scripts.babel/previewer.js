@@ -7,7 +7,7 @@ var Previewer = function(Profile, config, Tipped) {
 
   function initialize() {
     Tipped.updateConfigs(config);
-    document.body.addEventListener('mouseover', _thumbLinkEventHandler.mouseenter, !1);
+    document.body.addEventListener('mouseover', _thumbLinkEventHandler.mouseover, !1);
   }
 
   function debounce(fn, delay) {
@@ -30,13 +30,13 @@ var Previewer = function(Profile, config, Tipped) {
     Tipped.updateConfigs(config);
   }
 
-  _thumbLinkEventHandler.mouseenter = function(evt) {
-    console.log('mouseenter');
+  _thumbLinkEventHandler.mouseover = function(evt) {
     var { target } = evt;
     var videoId = Profile.getVideoId(target);
+    clearTimeout(timeout);
 
     if ('img' == target.localName && target.width > 50 && videoId) {
-      clearTimeout(timeout);
+      console.log('mouseover');
       evt.preventDefault();
       target.addEventListener('click', _thumbLinkEventHandler.mouseout, !1);
       timeout = setTimeout(function() {
